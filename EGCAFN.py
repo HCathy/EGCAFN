@@ -359,11 +359,6 @@ class EGCAFN(nn.Module):
         for layer in self.GCN_Branch:
             H = layer(H, A)
 
-        if residual.shape[-1] != H.shape[-1]:
-            linear_layer = nn.Linear(residual.shape[-1], H.shape[-1]).to(H.device)
-            residual = linear_layer(residual)
-        H = H + residual
-
         for layer in self.GAT_Branch:
             H = layer(H, A)
 
